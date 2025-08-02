@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOT - Trends of TUM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            900: '#0a0a0f',
+                            800: '#121218',
+                            700: '#1a1a25',
+                            600: '#222230',
+                        },
+                        tum: {
+                            blue: '#00558c',
+                            light: '#00a7e1',
+                            accent: '#ff6b00',
+                        }
+                    },
+                    backdropBlur: {
+                        xs: '2px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0a0f 0%, #121218 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .glass {
+            background: rgba(25, 25, 35, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card {
+            background: rgba(30, 30, 45, 0.35);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-button {
+            background: rgba(80, 80, 120, 0.25);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+        .glass-button:hover {
+            background: rgba(100, 100, 150, 0.35);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        .tum-gradient {
+            background: linear-gradient(90deg, #00558c, #00a7e1, #ff6b00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        .floating-delay {
+            animation: float 6s ease-in-out 1s infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .pulse {
+            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .glow {
+            box-shadow: 0 0 20px rgba(0, 85, 140, 0.3);
+        }
+        .glow-blue {
+            box-shadow: 0 0 20px rgba(0, 167, 225, 0.3);
+        }
+        .glow-orange {
+            box-shadow: 0 0 20px rgba(255, 107, 0, 0.3);
+        }
+        .hero-pattern {
+            background-image: radial-gradient(circle at 10% 20%, rgba(0, 85, 140, 0.1) 0%, transparent 20%),
+                              radial-gradient(circle at 90% 80%, rgba(0, 167, 225, 0.1) 0%, transparent 20%),
+                              radial-gradient(circle at 50% 50%, rgba(255, 107, 0, 0.05) 0%, transparent 30%);
+        }
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        .tum-badge {
+            background: linear-gradient(45deg, #00558c, #00a7e1);
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Mobile Menu Styles */
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 100%;
+            background-color: rgba(18, 18, 24, 0.95); /* Slightly opaque background */
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .mobile-menu.active {
+            display: block;
+        }
+        /* Adjust hero content padding for very small screens */
+        @media (max-width: 640px) {
+            .hero-content {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+             .hero-buttons .glass-button,
+             .hero-buttons .bg-gradient-to-r {
+                 width: 100%;
+                 justify-content: center;
+             }
+        }
+        /* Adjust testimonial font size */
+        @media (max-width: 768px) {
+            .testimonial-text {
+                font-size: 0.95rem; /* Slightly smaller text */
+            }
+        }
+
+    </style>
+</head>
+<body class="text-white">
+    <!-- Navigation -->
+    <nav class="glass py-4 px-4 sm:px-6 relative"> <!-- Adjusted padding -->
+        <div class="flex justify-between items-center max-w-7xl mx-auto"> <!-- Added container -->
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-gradient-to-br from-tum-blue to-tum-light flex items-center justify-center rounded-lg">
+                     <img src="./tot_square_logo.png" alt="TOT Logo" class="w-8 h-8"> <!-- Added alt and size -->
+                </div>
+                <div>
+                    <span class="text-xl font-bold block">TOT</span> <!-- Made TOT visible -->
+                    <span class="text-xs text-gray-400 block">Trends of TUM</span>
+                </div>
+            </div>
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex space-x-6"> <!-- Reduced space -->
+                <a href="#features" class="hover:text-tum-light transition text-sm">Features</a> <!-- Added text size -->
+                <a href="#about" class="hover:text-tum-light transition text-sm">About</a>
+                <a href="#testimonials" class="hover:text-tum-light transition text-sm">Testimonials</a>
+                <a href="#contact" class="hover:text-tum-light transition text-sm">Contact</a>
+            </div>
+            <div class="hidden md:flex items-center space-x-3"> <!-- Reduced space -->
+                <button class="glass-button px-3 py-1.5 rounded-lg text-sm font-medium">Sign In</button> <!-- Adjusted padding/text -->
+                <button class="bg-gradient-to-r from-tum-blue to-tum-light px-3 py-1.5 rounded-lg text-sm font-medium hover:opacity-90 transition">Join Now</button>
+            </div>
+            <!-- Mobile Menu Button -->
+             <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="mobile-menu md:hidden">
+            <div class="flex flex-col space-y-4 pb-4">
+                 <a href="#features" class="hover:text-tum-light transition">Features</a>
+                <a href="#about" class="hover:text-tum-light transition">About</a>
+                <a href="#testimonials" class="hover:text-tum-light transition">Testimonials</a>
+                <a href="#contact" class="hover:text-tum-light transition">Contact</a>
+            </div>
+            <div class="flex flex-col space-y-3 pt-4 border-t border-gray-700">
+                 <button class="glass-button px-4 py-2 rounded-lg font-medium w-full">Sign In</button>
+                <button class="bg-gradient-to-r from-tum-blue to-tum-light px-4 py-2 rounded-lg font-medium w-full hover:opacity-90 transition">Join Now</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-pattern py-16 px-4 max-w-7xl mx-auto"> <!-- Reduced padding -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div class="hero-content space-y-4"> <!-- Wrapped content, reduced space-y -->
+                <div class="tum-badge inline-block">EXCLUSIVELY FOR TUM STUDENTS</div>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight"> <!-- Adjusted text sizes -->
+                    Connect with <span class="tum-gradient">TUM Community</span> Like Never Before
+                </h1>
+                <p class="text-base sm:text-lg text-gray-300 max-w-lg"> <!-- Adjusted text sizes -->
+                    TOT (Trends of TUM) is the premier social platform for Technical University of Munich students. Discover, connect, and thrive within your academic community.
+                </p>
+                <div class="hero-buttons flex flex-wrap gap-3 pt-4"> <!-- Wrapped buttons, reduced gap -->
+                    <button class="glass-button px-5 py-2.5 rounded-xl font-medium flex items-center justify-center space-x-2 glow text-sm sm:text-base"> <!-- Adjusted padding/text -->
+                        <i class="fas fa-rocket"></i>
+                        <span>Explore Features</span>
+                    </button>
+                    <button class="bg-gradient-to-r from-tum-blue to-tum-light px-5 py-2.5 rounded-xl font-medium flex items-center justify-center space-x-2 hover:opacity-90 transition text-sm sm:text-base">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Join TUM Community</span>
+                    </button>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="absolute -top-8 -right-8 w-48 h-48 sm:w-64 sm:h-64 bg-tum-blue rounded-full mix-blend-soft-light filter blur-3xl opacity-20"></div> <!-- Adjusted sizes -->
+                <div class="absolute -bottom-8 -left-8 w-48 h-48 sm:w-64 sm:h-64 bg-tum-light rounded-full mix-blend-soft-light filter blur-3xl opacity-20"></div>
+                <div class="relative grid grid-cols-2 gap-4 sm:gap-6"> <!-- Adjusted gap -->
+                    <div class="glass-card rounded-2xl p-4 sm:p-6 h-56 sm:h-64 floating"> <!-- Adjusted padding/height -->
+                        <div class="feature-icon bg-gradient-to-br from-tum-blue to-tum-light">
+                            <i class="fas fa-users text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 text-center">Connect</h3> <!-- Adjusted text size -->
+                        <p class="text-gray-300 text-xs sm:text-sm text-center">Build meaningful connections with fellow students across all departments</p> <!-- Adjusted text size -->
+                    </div>
+                    <div class="glass-card rounded-2xl p-4 sm:p-6 h-56 sm:h-64 mt-8 sm:mt-12 floating-delay"> <!-- Adjusted padding/height/margin -->
+                        <div class="feature-icon bg-gradient-to-br from-tum-light to-tum-accent">
+                            <i class="fas fa-lightbulb text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 text-center">Discover</h3>
+                        <p class="text-gray-300 text-xs sm:text-sm text-center">Find trends, events, and resources tailored to your interests</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-4 sm:p-6 h-56 sm:h-64 floating-delay">
+                        <div class="feature-icon bg-gradient-to-br from-tum-accent to-tum-blue">
+                            <i class="fas fa-graduation-cap text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 text-center">Learn</h3>
+                        <p class="text-gray-300 text-xs sm:text-sm text-center">Getting Knowledges from experienced seniors and teachers</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-4 sm:p-6 h-56 sm:h-64 floating">
+                        <div class="feature-icon bg-gradient-to-br from-gray-700 to-dark-800">
+                            <i class="fas fa-infinity text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 text-center">Thrive</h3>
+                        <p class="text-gray-300 text-xs sm:text-sm text-center">Enhance your university experience with our community-driven platform</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 px-4 max-w-7xl mx-auto"> <!-- Reduced padding -->
+        <div class="text-center mb-12"> <!-- Reduced margin -->
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-3">Why <span class="tum-gradient">TOT</span> Stands Out</h2> <!-- Adjusted text sizes -->
+            <p class="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">Designed specifically for TUM students with features that enhance your academic and social experience</p> <!-- Adjusted text size -->
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6"> <!-- Reduced gap -->
+            <div class="glass-card rounded-2xl p-6 hover:glow transition-all duration-300"> <!-- Reduced padding -->
+                <div class="feature-icon bg-gradient-to-br from-tum-blue to-tum-light">
+                    <i class="fas fa-user-friends text-white text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 text-center">Departmental Networking</h3> <!-- Reduced margin -->
+                <p class="text-gray-300 text-center text-sm">Connect with students in your department and across faculties to build your academic network.</p> <!-- Adjusted text size -->
+            </div>
+            <div class="glass-card rounded-2xl p-6 hover:glow-blue transition-all duration-300">
+                <div class="feature-icon bg-gradient-to-br from-tum-light to-tum-accent">
+                    <i class="fas fa-calendar-alt text-white text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 text-center">Campus Events</h3>
+                <p class="text-gray-300 text-center text-sm">Stay updated with all campus events, workshops, and social gatherings in one place.</p>
+            </div>
+            <div class="glass-card rounded-2xl p-6 hover:glow-orange transition-all duration-300">
+                <div class="feature-icon bg-gradient-to-br from-tum-accent to-tum-blue">
+                    <i class="fas fa-graduation-cap text-white text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 text-center">Academic Resources</h3>
+                <p class="text-gray-300 text-center text-sm">Access shared study materials, research opportunities, and academic support from peers.</p>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6"> <!-- Reduced gap/margin -->
+            <div class="glass-card rounded-2xl p-6">
+                <div class="feature-icon bg-gradient-to-br from-gray-700 to-dark-800">
+                    <i class="fas fa-shield-alt text-white text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 text-center">Secure & Private</h3>
+                <p class="text-gray-300 text-center text-sm">TOT is exclusively for TUM students with verified accounts, ensuring a safe and trusted environment.</p>
+            </div>
+            <div class="glass-card rounded-2xl p-6">
+                <div class="feature-icon bg-gradient-to-br from-dark-700 to-tum-blue">
+                    <i class="fas fa-mobile-alt text-white text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 text-center">Responsiveness</h3>
+                <p class="text-gray-300 text-center text-sm">Stay connected on the go with our responsive web app and upcoming mobile applications.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 px-4 max-w-7xl mx-auto"> <!-- Reduced padding -->
+        <div class="glass rounded-3xl p-6 sm:p-8 md:p-12"> <!-- Adjusted padding -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center"> <!-- Adjusted gap -->
+                <div>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Discover the Latest <span class="tum-gradient">TUM Trends</span></h2> <!-- Adjusted text sizes -->
+                    <p class="text-gray-300 mb-4 text-sm sm:text-base"> <!-- Adjusted text size -->
+                        Trends of TUM was created by passionate TUM students who recognized the need for a dedicated platform to showcase the latest campus trends, events, and student activities. We understand what's happening now and what's coming next at TUM.
+                    </p>
+                    <p class="text-gray-300 mb-6 text-sm sm:text-base"> <!-- Adjusted text size -->
+                        Our platform captures the pulse of TUM life by highlighting trending topics, upcoming events, and the most talked-about activities on campus. Stay ahead of the curve and never miss what's trending at Technical University of Munich.
+                    </p>
+                    <div class="flex items-center space-x-3"> <!-- Reduced space -->
+                        <div class="flex -space-x-1.5"> <!-- Reduced overlap -->
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-tum-blue to-tum-light flex items-center justify-center text-white text-xs sm:text-sm font-bold">A</div> <!-- Adjusted size/text -->
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-tum-light to-tum-accent flex items-center justify-center text-white text-xs sm:text-sm font-bold">B</div>
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-tum-accent to-tum-blue flex items-center justify-center text-white text-xs sm:text-sm font-bold">C</div>
+                        </div>
+                        <p class="text-gray-400 text-xs sm:text-sm">Founded by Team Web Wizards</p> <!-- Adjusted text size -->
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3 sm:gap-4"> <!-- Adjusted gap -->
+                    <div class="glass-card rounded-2xl p-4 sm:p-6 text-center"> <!-- Adjusted padding -->
+                        <div class="text-2xl sm:text-3xl md:text-4xl font-bold tum-gradient">150+</div> <!-- Adjusted text sizes -->
+                        <p class="text-gray-400 mt-1 text-xs sm:text-sm">Weekly Events</p> <!-- Adjusted margin/text -->
+                    </div>
+                    <div class="glass-card rounded-2xl p-4 sm:p-6 text-center">
+                        <div class="text-2xl sm:text-3xl md:text-4xl font-bold tum-gradient">50+</div>
+                        <p class="text-gray-400 mt-1 text-xs sm:text-sm">Trending Topics</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-4 sm:p-6 text-center">
+                        <div class="text-2xl sm:text-3xl md:text-4xl font-bold tum-gradient">2000+</div>
+                        <p class="text-gray-400 mt-1 text-xs sm:text-sm">Active Students</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-4 sm:p-6 text-center">
+                        <div class="text-2xl sm:text-3xl md:text-4xl font-bold tum-gradient">95%</div>
+                        <p class="text-gray-400 mt-1 text-xs sm:text-sm">Event Attendance</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-16 px-4 max-w-7xl mx-auto"> <!-- Reduced padding -->
+        <div class="text-center mb-12"> <!-- Reduced margin -->
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-3">What <span class="tum-gradient">TUM Students</span> Say</h2> <!-- Adjusted text sizes -->
+            <p class="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">Hear from your fellow students about their experience with TOT</p> <!-- Adjusted text size -->
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6"> <!-- Reduced gap -->
+            <div class="glass-card rounded-2xl p-6"> <!-- Reduced padding -->
+                <div class="flex items-center mb-4"> <!-- Reduced margin -->
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-tum-blue to-tum-light flex items-center justify-center text-white font-bold mr-3 text-sm sm:text-base">A</div> <!-- Adjusted size/text -->
+                    <div>
+                        <h4 class="font-bold text-sm sm:text-base">Aung Aung</h4> <!-- Adjusted text size -->
+                        <p class="text-xs sm:text-sm text-gray-400">Information Technology</p> <!-- Adjusted text size -->
+                    </div>
+                </div>
+                <p class="testimonial-text text-gray-300 italic text-sm"> <!-- Applied class and adjusted size -->
+                    "TOT website က အရမ်းမိုက်ပါတယ် ၊ အချိန်ကုန်လည်းသက်သာတယ်၊ ကျောင်းတွင်းကိစ္စတွေ ကို ချက်ချင်းသိရတယ်၊ ပြီးရင် စာလေ့လာတဲ့နေရာမှာလည်း အထောက်အကူပြုတယ် ၊ Facebook တိုနဲ့လည်း မတူညီဘဲ ကွဲပြားတဲ့ နေရာတွေလည်းအများကြီးပါ။ အရမ်းမိုက်ပါတယ်။"
+                </p>
+                <div class="flex text-tum-accent mt-3 text-sm"> <!-- Reduced margin/text size -->
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+            <div class="glass-card rounded-2xl p-6">
+                <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-tum-light to-tum-accent flex items-center justify-center text-white font-bold mr-3 text-sm sm:text-base">M</div>
+                    <div>
+                        <h4 class="font-bold text-sm sm:text-base">Min Min</h4>
+                        <p class="text-xs sm:text-sm text-gray-400">Mechanical Engineering</p>
+                    </div>
+                </div>
+                <p class="testimonial-text text-gray-300 italic text-sm">
+                    "အာရုံတွေ အရမ်းနောက်လွန်းလို social media ကို မသုံးဖြစ်သလောက်ပါ၊ ဒါပေမယ့် TOT မှာကျတော့ မတူပါဘူး၊ Straight to point ဖြစ်တယ်၊ ကိုယ်မြင်ချင်တာ သိချင်တာဘဲ အများအားဖြင့်မြင်ရတယ် ၊ TUM တက်နေရင် ဒီ social media website ကို သုံးဖို သင့်တယ်လို ထင်တယ်။"
+                </p>
+                <div class="flex text-tum-accent mt-3 text-sm">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+            <div class="glass-card rounded-2xl p-6">
+                <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-tum-accent to-tum-blue flex items-center justify-center text-white font-bold mr-3 text-sm sm:text-base">K</div>
+                    <div>
+                        <h4 class="font-bold text-sm sm:text-base">Khin Khin</h4>
+                        <p class="text-xs sm:text-sm text-gray-400">Architecture</p>
+                    </div>
+                </div>
+                <p class="testimonial-text text-gray-300 italic text-sm">
+                    "ကိုယ့်ကျောင်းကလူတွေဘဲရှိတယ်ဆိုတော့ သုံးရတာ အရမ်း မိုက်တယ်၊ Events တွေ ကျောင်းထဲမှာ Trends ဖြစ်တာတွေ တန်းသိရတယ်၊ Entertainments လေးတွေပါ တင်လို့ရနေတော့ မိုက်တာဘဲပေါ့။"
+                </p>
+                <div class="flex text-tum-accent mt-3 text-sm">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 px-4 max-w-7xl mx-auto"> <!-- Reduced padding -->
+        <div class="glass rounded-3xl p-8 sm:p-10 md:p-12 text-center"> <!-- Adjusted padding -->
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Ready to Join the <span class="tum-gradient">TUM Community</span>?</h2> <!-- Adjusted text sizes -->
+                <p class="text-gray-300 mb-6 text-base sm:text-lg">Connect with thousands of TUM students, discover opportunities, and enhance your university experience.</p> <!-- Adjusted text size -->
+                <div class="flex flex-col sm:flex-row justify-center gap-3"> <!-- Reduced gap -->
+                    <button class="glass-button px-6 py-3 rounded-xl font-medium text-base sm:text-lg flex items-center justify-center space-x-2"> <!-- Adjusted padding/text -->
+                        <i class="fas fa-info-circle"></i>
+                        <span>Learn More</span>
+                    </button>
+                    <button class="bg-gradient-to-r from-tum-blue to-tum-light px-6 py-3 rounded-xl font-medium text-base sm:text-lg flex items-center justify-center space-x-2 hover:opacity-90 transition">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Join TOT Now</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="py-10 px-4 border-t border-gray-800"> <!-- Reduced padding -->
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8"> <!-- Ensured stacking on small screens -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-tum-blue to-tum-light flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-white text-sm"></i>
+                        </div>
+                        <span class="text-xl font-bold">TOT</span>
+                    </div>
+                    <p class="text-gray-400 mb-4 text-sm">Trends of TUM - The innovative social platform for Technological University Mandalay students.</p> <!-- Adjusted text size -->
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition text-lg"><i class="fab fa-twitter"></i></a> <!-- Adjusted icon size -->
+                        <a href="#" class="text-gray-400 hover:text-white transition text-lg"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition text-lg"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition text-lg"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Platform</h4>
+                    <ul class="space-y-2"> <!-- Reduced spacing -->
+                        <li><a href="#" class="text-gray-400 hover:text-white transition text-sm">Features</a></li> <!-- Adjusted text size -->
+                        <li><a href="#" class="text-gray-400 hover:text-white transition text-sm">Departments</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition text-sm">Events</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition text-sm">Resources</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition text-sm">Mobile App</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Support</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition text-sm">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition text-sm">Community Guidelines</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition text-sm">Safety Tips</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition text-sm">Report Issues</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition text-sm">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Stay Updated</h4>
+                    <p class="text-gray-400 mb-4 text-sm">Get the latest news and updates about TOT.</p> <!-- Adjusted text size -->
+                    <div class="flex flex-col sm:flex-row gap-2"> <!-- Added gap, column layout -->
+                        <input type="email" placeholder="Your TUM email" class="glass-button px-4 py-2.5 rounded-lg w-full focus:outline-none text-sm"> <!-- Adjusted padding/text -->
+                        <button class="bg-gradient-to-r from-tum-blue to-tum-light px-4 py-2.5 rounded-lg text-sm"> <!-- Adjusted padding/text -->
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-10 pt-6 text-center text-gray-500 text-xs"> <!-- Reduced margins/padding/text -->
+                <p>© 2025 TOTv2 - Trends of TUM. All rights reserved. Created by 4IT students for TUM community.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
