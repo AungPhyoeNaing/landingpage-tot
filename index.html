@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOT - Trends of TUM</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./styles/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
@@ -30,132 +31,7 @@
             }
         }
     </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0a0a0f 0%, #121218 100%);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-        .glass {
-            background: rgba(25, 25, 35, 0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .glass-card {
-            background: rgba(30, 30, 45, 0.35);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .glass-button {
-            background: rgba(80, 80, 120, 0.25);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
-        }
-        .glass-button:hover {
-            background: rgba(100, 100, 150, 0.35);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-        .tum-gradient {
-            background: linear-gradient(90deg, #00558c, #00a7e1, #ff6b00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-        .floating-delay {
-            animation: float 6s ease-in-out 1s infinite;
-        }
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-        .pulse {
-            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        .glow {
-            box-shadow: 0 0 20px rgba(0, 85, 140, 0.3);
-        }
-        .glow-blue {
-            box-shadow: 0 0 20px rgba(0, 167, 225, 0.3);
-        }
-        .glow-orange {
-            box-shadow: 0 0 20px rgba(255, 107, 0, 0.3);
-        }
-        .hero-pattern {
-            background-image: radial-gradient(circle at 10% 20%, rgba(0, 85, 140, 0.1) 0%, transparent 20%),
-                              radial-gradient(circle at 90% 80%, rgba(0, 167, 225, 0.1) 0%, transparent 20%),
-                              radial-gradient(circle at 50% 50%, rgba(255, 107, 0, 0.05) 0%, transparent 30%);
-        }
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-        }
-        .tum-badge {
-            background: linear-gradient(45deg, #00558c, #00a7e1);
-            padding: 2px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        /* Mobile Menu Styles */
-        .mobile-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            width: 100%;
-            background-color: rgba(18, 18, 24, 0.95); /* Slightly opaque background */
-            backdrop-filter: blur(10px);
-            padding: 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .mobile-menu.active {
-            display: block;
-        }
-        /* Adjust hero content padding for very small screens */
-        @media (max-width: 640px) {
-            .hero-content {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-            .hero-buttons {
-                flex-direction: column;
-                align-items: stretch;
-            }
-             .hero-buttons .glass-button,
-             .hero-buttons .bg-gradient-to-r {
-                 width: 100%;
-                 justify-content: center;
-             }
-        }
-        /* Adjust testimonial font size */
-        @media (max-width: 768px) {
-            .testimonial-text {
-                font-size: 0.95rem; /* Slightly smaller text */
-            }
-        }
-
-    </style>
+    
 </head>
 <body class="text-white">
     <!-- Navigation -->
@@ -163,7 +39,7 @@
         <div class="flex justify-between items-center max-w-7xl mx-auto"> <!-- Added container -->
             <div class="flex items-center space-x-2">
                 <div class="w-10 h-10 bg-gradient-to-br flex items-center justify-center rounded-lg">
-                     <img src="./tot_square_logo.png" alt="TOT Logo" class="w-8 h-8"> <!-- Added alt and size -->
+                     <img src="./assets/images/tot_square_logo.png" alt="TOT Logo" class="w-8 h-8"> <!-- Added alt and size -->
                 </div>
                 <div>
                     <span class="text-xl font-bold block">TOT</span> <!-- Made TOT visible -->
@@ -493,12 +369,6 @@
         </div>
     </footer>
 
-    <script>
-        // Mobile menu toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('active');
-        });
-    </script>
+    <script src="./scripts/main.js"></script>
 </body>
 </html>
